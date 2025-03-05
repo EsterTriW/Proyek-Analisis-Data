@@ -86,10 +86,16 @@ ax.set_ylabel("Jumlah Penyewaan")
 st.pyplot(fig)
 
 # Pengaruh Cuaca terhadap Penyewaan Sepeda
+day_df["weathersit"] = day_df["weathersit"].map({
+    1: "Cerah",
+    2: "Berawan/Mendung",
+    3: "Hujan Ringan",
+    4: "Hujan Lebat"
+})
 st.subheader("Pengaruh Cuaca terhadap Penyewaan Sepeda")
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.boxplot(data=day_df, x="weathersit", y="cnt", palette="coolwarm", ax=ax)
-ax.set_xticklabels(["Mendung/berawan", "Cerah", "Hujan Ringan", "Hujan Lebat"])
+order = ["Berawan/Mendung", "Cerah", "Hujan Ringan"]
+sns.boxplot(data=day_df, x="weathersit", y="cnt", palette="coolwarm", ax=ax, order=order)
 ax.set_title("Pengaruh Cuaca terhadap Penyewaan Sepeda")
 ax.set_xlabel("Kondisi Cuaca")
 ax.set_ylabel("Jumlah Penyewaan")
